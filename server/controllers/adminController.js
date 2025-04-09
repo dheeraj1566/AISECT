@@ -1,7 +1,7 @@
-// controllers/adminController.js
 import User from "../models/Users.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+// import { token} from "../middlewares/Authentication.js";
 
 export const registerAdmin = async (req, res) => {
   try {
@@ -33,7 +33,7 @@ export const loginAdmin = async (req, res) => {
         secure: process.env.NODE_ENV === "production",
         sameSite: "none"
       })
-      .json({ message: "Login successful", role: user.role });
+      .json({ message: "Login successful", role: user.role, token});
   } catch (err) {
     res.status(500).json({ message: "Login failed", err });
   }
